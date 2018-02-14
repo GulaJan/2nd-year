@@ -1,0 +1,31 @@
+.TH TRACE 1
+.SH NAME
+trace \- displays the route (path) of packets across a network
+.SH SYNOPSIS
+.B trace
+[\fB\-f\fR \fIfirst time to live\fR]
+[\fB\-m\fR \fImax time to live\fR]
+.IR ip-address ...
+.SH DESCRIPTION
+.B trace
+sends a User Datagram Protocol (UDP) packet addressed to a destination host. The time to live (TTL) also known as hop limit is used to determine the number of intermediate routers being visited. Each router decrements the TTL value by one and discard packets which value has reached zero returning the ICMP error message. Trace increments the TTL by one for each packet send starting at TTL one. The first router encountered receives the packet decrements its TTL and returns an ICMP Time Exceeded error message. Trace expects a reply within a specified number of seconds known as timeout time.
+.SH OPTIONS
+.TP
+.BR \-f ,
+Set the TTL of the first packet to this value.
+Default is one.
+.TP
+.BR \-m ,
+Set the maximum TTL to this value.
+Default is thirty.
+.SH EXAMPLES
+trace 158.172.1.1
+.SH SEE ALSO
+man traceroute
+.SH BUGS
+.B trace
+can only accept IP addresses, no DNS translation available
+.SH AUTHOR
+Jan Gula(xgulaj00)
+.SH COPYRIGHT
+All rights reserved to Jan Gula
