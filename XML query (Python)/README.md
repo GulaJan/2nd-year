@@ -6,13 +6,13 @@ expressions making it much shorter than other versions.
 
 # Usage
 
-**--help** Prints help.
-**--input** Input file with an XML structure.
-**--output** Output file with filtered data.
-**--query** Query on data.
-**--qf** Query in a file.
-**-n** Dont generate a header for our output XML.
-**--root** Name of a root element to enclose the results.
+**--help** Prints help.  
+**--input** Input file with an XML structure.  
+**--output** Output file with filtered data.  
+**--query** Query on data.  
+**--qf** Query in a file.  
+**-n** Dont generate a header for our output XML.  
+**--root** Name of a root element to enclose the results.  
 
 ## Examples
 
