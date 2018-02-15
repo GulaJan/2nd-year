@@ -30,4 +30,4 @@ Open the project in the root folder and type into the command line:
 
 # GUI
 
-![Text](https://imgur.com/4SxO6Bg "GUI")
+![Text](https://i.imgur.com/4SxO6Bg.jpg "GUI")
