@@ -16,10 +16,10 @@ expressions making it much shorter than other versions.
 
 ## Examples
 
-python3.5 ./xqr.py --input=test.in --query="SELECT book FROM ROOT WHERE price< 20"
+python3 ./xqr.py --input=test.in --query="SELECT book FROM ROOT WHERE price< 20"
 
-python3.5 ./xqr.py --input=test.in --output=out --qf=input
+python3 ./xqr.py --input=test.in --output=out --qf=input
 
-input
+**input**
 
 SELECT book FROM ROOT WHERE price < 5
