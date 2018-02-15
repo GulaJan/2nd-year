@@ -4,7 +4,7 @@ command. The query then filtered data written in an XML file which was our input
 into an output XML file. This program acts as a script. My implementation is mostly build on regular
 expressions making it much shorter than other versions.
 
-**USAGE**
+# Usage
 
 **--help** Prints help.
 **--input** Input file with an XML structure.
