@@ -19,7 +19,7 @@ Martin Nizner**
 ## Requirements
 
 - JDK 7+ (sudo apt-get install openjdk-8-jdk)
-- JFX (sudo apt-get install openjfx
+- JFX (sudo apt-get install openjfx)
 - Ant (sudo apt-get install ant)
 
 # Usage
