@@ -26,7 +26,7 @@ class ArgParse:
 --root Name of a root element to enclose the results.\n""")
 			sys.exit(0)	
 	else: sys.exit(1)
-# defining the valid options of our argument parser
+# defining valid options of our argument parser
 	inputFile = sys.stdin
 	parser = argparse.ArgumentParser(add_help = False)
 	parser.add_argument('--help', action="store_true", dest="help", help='Prints help.')
@@ -67,6 +67,8 @@ class ArgParse:
 		except:
 			sys.stderr.write("Cannot open output file.\n")
 			sys.exit(3)
+	else :
+		outFD = sys.stdout
 #try to open query file
 	if(args.qf != None):
 		try:
@@ -299,6 +301,7 @@ class ArgParse:
 #	functions = collection.getElementsByTagName(element)
 #	attrs = functions.getElementsByTagName(co)
 	if(args.n == False) :
+		if(outFD != None) :
 		  outFD.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
 	if(args.root != None) :
 		outFD.write("<" + args.root + ">")
