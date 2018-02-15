@@ -14,6 +14,48 @@ class ArgParse:
 		query = ''
 		qf = ''
 		root = ''
+
+	def conditionResult(nF, elemV, op, compV) :
+		origin = compV
+		compV = compV.replace("\"", "")
+		if(op == ">") :
+			if(nF == False) :
+				return(elemV > compV)
+			else :
+				return(not(elemV > compV))
+		elif(op == "<") :
+			if(nF == False) :
+				return float(elemV) < float(compV)
+			else :
+				return not(elemV < compV)
+		elif(op == "=") :
+			if(nF == False) :
+				return(elemV == compV)
+			else :
+				return(not(elemV == compV))
+		elif(op == "CONTAINS") :
+			rExp = "\"\S+\""
+			patrn = re.compile(rExp)
+			match = re.match(patrn, origin)
+			try :
+				match.group(0)
+			except :
+				sys.stderr.write("Invalid query.\n")
+				sys.exit(80)
+			if(not(isinstance(compV, str))) :
+				sys.stderr.write("Invalid query.\n")
+				sys.exit(80)
+			if(isinstance(elemV, str) and compV.replace("\"", "") in elemV) :
+				if(nF == False) :
+					return True
+				else :
+					return False
+			else :
+				if(nF == False) :
+					return False
+				else :
+					return True
+
 	if(len(sys.argv) > 1):
 		if(sys.argv[1] == '--help'):
 			sys.stdout.write("""Usage:
@@ -119,7 +161,7 @@ class ArgParse:
 	notCount = 0
 	condition = result['from']
 	partsOC = condition.split()
-#initializing element and attribute in case they 
+#initializing element and attribute in case they are not set
 	element = None
 	attribute = None
 #if theres a dot we know its not only an element
@@ -133,7 +175,7 @@ class ArgParse:
 	else :
 		realAtt = None
 		element = result['from']
-#if theres something followin the where clause
+#if theres something following the where clause parse it
 	if(result['where'] != None) :
 		regExp = "([a-zA-Z_.]+)\s?([[=><])?(CONTAINS)?\s?(\S+)\s?((LIMIT)?\s(\S+)?)?"
 		ptrn = re.compile(regExp)
@@ -143,7 +185,7 @@ class ArgParse:
 		except:
 		  sys.stderr.write("Invalid query2.\n")
 		  sys.exit(80)      
-#saving the element in where		
+#storing the element in where		
 		if(match.group(1) != None) :
 			el = match.group(1)
 		else :
@@ -151,14 +193,12 @@ class ArgParse:
 			sys.exit(80)
 #separating the where clause string by string
 		operator = match.group(2)
-#regexping the WHERE clause
 		contains = match.group(3)
 		if(match.group(4) != None) :
 			literal = match.group(4)
 		else :
 			sys.stderr("Invalid query5.\n")
 			sys.exit(80)
-#limitFlag tells us if theres LIMIT present in the query
 		limFLAG = False
 		if(match.group(6) != None) :
 			limFLAG = True
@@ -220,46 +260,6 @@ class ArgParse:
 	elif(sel != None) :
 		for el in parsedFrom :
 			parsedSel.extend(el.getElementsByTagName(sel))
-	def conditionResult(nF, elemV, op, compV) :
-		origin = compV
-		compV = compV.replace("\"", "")
-		if(op == ">") :
-			if(nF == False) :
-				return(elemV > compV)
-			else :
-				return(not(elemV > compV))
-		elif(op == "<") :
-			if(nF == False) :
-				return float(elemV) < float(compV)
-			else :
-				return not(elemV < compV)
-		elif(op == "=") :
-			if(nF == False) :
-				return(elemV == compV)
-			else :
-				return(not(elemV == compV))
-		elif(op == "CONTAINS") :
-			rExp = "\"\S+\""
-			patrn = re.compile(rExp)
-			match = re.match(patrn, origin)
-			try :
-				match.group(0)
-			except :
-				sys.stderr.write("Invalid query.\n")
-				sys.exit(80)
-			if(not(isinstance(compV, str))) :
-				sys.stderr.write("Invalid query.\n")
-				sys.exit(80)
-			if(isinstance(elemV, str) and compV.replace("\"", "") in elemV) :
-				if(nF == False) :
-					return True
-				else :
-					return False
-			else :
-				if(nF == False) :
-					return False
-				else :
-					return True
 	parsedWhere = []
 	if(result['where'] != None) :
 		if(where_Element != None and where_RealAtt == None) :
@@ -297,9 +297,6 @@ class ArgParse:
 			sys.stderr.write("Invalid query.\n")
 			sys.exit(80)
 # if n is false generate header
-#	    print(s.attributes['name'].value)
-#	functions = collection.getElementsByTagName(element)
-#	attrs = functions.getElementsByTagName(co)
 	if(args.n == False) :
 		if(outFD != None) :
 		  outFD.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
