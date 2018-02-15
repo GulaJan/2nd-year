@@ -4,16 +4,16 @@ Our task was to implement our own version of the Solitaire Klondike game using t
 
 **Authors**
 
-Ján Gula  
-Martin Nizner
+**Ján Gula  
+Martin Nizner**
 
 ## Options
 
-**New** Creates a new instance of the game
-**Save** Saves the current state
-**Load** Loads a saved state
-**Undo** Reload the state of the game before the last change
-**Exit** Closes the application
+**New** Creates a new instance of the game  
+**Save** Saves the current state  
+**Load** Loads a saved state  
+**Undo** Reload the state of the game before the last change  
+**Exit** Closes the application  
 
 
 ## Requirements
@@ -30,5 +30,4 @@ Open the project in the root folder and type into the command line:
 
 # GUI
 
-GUI: 
-![alt text](https://imgur.com/4SxO6Bg)
+![Text](https://imgur.com/4SxO6Bg "GUI")
